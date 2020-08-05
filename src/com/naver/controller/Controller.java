@@ -11,28 +11,16 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.jasper.tagplugins.jstl.core.Out;
 
-/**
- * Servlet implementation class Controller
- */
 @WebServlet("*.nhn")
 public class Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public Controller() {
         super();
-        // TODO Auto-generated constructor stub
     }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		StringBuffer url = request.getRequestURL();
-		System.out.println(url);
+//		StringBuffer url = request.getRequestURL();
+//		System.out.println(url);
+		
 		String uri = request.getRequestURI();
 		String [] arrUri = uri.split("/");
 		uri = arrUri[2];
@@ -57,6 +45,14 @@ public class Controller extends HttpServlet {
 			site = "search.jsp";
 		} else if (uri.equals("searchok.nhn")) {
 			site = "SearchServlet";
+		} else if (uri.equals("food.nhn")) {
+			site = "food.jsp";
+		} else if (uri.equals("foodok.nhn")) {
+			site = "FoodServlet";
+		} else if (uri.equals("movie.nhn")) {
+			site = "movie.jsp";
+		} else if (uri.equals("movieok.nhn")) {
+			site = "MovieServlet";
 		} else {
 			site = "404.jsp";
 			System.out.println("error");
@@ -67,11 +63,7 @@ public class Controller extends HttpServlet {
 		
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

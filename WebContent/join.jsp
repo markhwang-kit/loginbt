@@ -21,8 +21,8 @@
 
     </div> <!-- form-group// -->
     <div class="form-group input-group">
-       	<div id="email-success">email 사용이 가능합니다.</div>
-    	<div id="email-danger">이미 가입된 Email이 있습니다.</div>
+       	<div class="alert alert-success" id="email-success">email 사용이 가능합니다.</div>
+    	<div class="alert alert-danger" id="email-danger">이미 가입된 Email이 있습니다.</div>
     </div>
     <div class="form-group input-group">
     	<div class="input-group-prepend">
@@ -103,13 +103,14 @@ $(document).ready(function(){
         	    },
         	    function(data,status){
         	    	if (data.trim() == "ok") {
+        	    		$("#email-success").hide();
+       	    		 	$("#email-danger").show();
+//          	    		alert("이메일이 있습니다");	
+        	    	} else {
         	    		$("#email-danger").hide();
         	    		$("#email-success").show();
-//         	    		alert("이메일이 있습니다");	
-        	    	} else {
-        	    		 $("#email-success").hide();
-        	    		 $("#email-danger").show();
-//         	    		alert("가입이 가능한 메일입니다.");	
+
+//          	    		alert("가입이 가능한 메일입니다.");	
         	    	}
         	      
        	});

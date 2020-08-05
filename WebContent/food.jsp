@@ -12,8 +12,8 @@
 <div class="container">
 <div class="card bg-light">
 <article class="card-body mx-auto" style="max-width: 400px;">
-	<h4 class="card-title mt-3 text-center">날씨 검색</h4>
-	<p class="text-center">날씨를 알고 싶은 지역을 입력 하세요(뉴스검색)</p>
+	<h4 class="card-title mt-3 text-center">맛집 검색</h4>
+	<p class="text-center">지역을 입력 하세요(블로그 검색)</p>
 	
     <div class="form-group input-group">
         <input id="search" name="search" class="form-control" placeholder="부산" type="text" value="">
@@ -36,7 +36,7 @@ $(document).ready(function(){
 	var search = $("#search").val();
 	$("#result").html("여기에 찍히나: " + search);
 	console.log(search);
-    $.post("searchok.nhn",
+    $.post("foodok.nhn",
     {
     	search: search
     },

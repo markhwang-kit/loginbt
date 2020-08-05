@@ -21,7 +21,7 @@ MemberDto dto = (MemberDto)session.getAttribute("member");
 
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
   <!-- Brand/logo -->
-  <a class="navbar-brand" href="main.nhn">날씨 검색</a>
+  <a class="navbar-brand" href="main.nhn">검색사이트</a>
   
   <!-- Links -->
   <ul class="navbar-nav">
@@ -38,7 +38,13 @@ MemberDto dto = (MemberDto)session.getAttribute("member");
     </li>
 <% } %>
     <li class="nav-item">
-      <a class="nav-link" href="search.nhn">검색</a>
+      <a class="nav-link" href="search.nhn">날씨 검색</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="food.nhn">맛집 검색</a>
+    </li>
+     <li class="nav-item">
+      <a class="nav-link" href="movie.nhn">영화 랭킹</a>
     </li>
   </ul>
 </nav>
