@@ -20,9 +20,11 @@ $(document).ready(function(){
     	console.log(data);
 //     	console.log(data.items);
     	$.each(data, function(key, field){
-    		html += "<a href='" + field.link + "' target='_blank'>"
-    		html += "<img src='" + field.imgsrc + "'></a><br>";
-    		html += field.title + "<br>";
+//     		html += "<a href='" + field.link + "' target='_blank'>"
+    		html += "<img src='" + field.img + "'></a><br>";
+    		html += field.je + "<br>";
+    		html += field.gam + "<br>";
+    		html += field.bae + "<br>";
           });
 		$("#result").html(html);
     });

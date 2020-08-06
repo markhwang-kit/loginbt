@@ -1,29 +1,43 @@
 package com.naver.dto;
 
 public class MovieDto {
-	private String title;
-	private String link;
-	private String imgsrc;
+	private int num;
+	private String je;
+	private String bae;
+	private String gam;
+	private String img;
 	
-	public String getTitle() {
-		return title;
+	public int getNum() {
+		return num;
 	}
-	public void setTitle(String title) {
-		this.title = title;
+	public void setNum(int num) {
+		this.num = num;
 	}
-	public String getLink() {
-		return link;
+	public String getJe() {
+		return je;
 	}
-	public void setLink(String link) {
-		this.link = link;
+	public void setJe(String je) {
+		this.je = je;
 	}
-	public String getImgsrc() {
-		return imgsrc;
+	public String getBae() {
+		return bae;
 	}
-	public void setImgsrc(String imgsrc) {
-		this.imgsrc = imgsrc;
+	public void setBae(String bae) {
+		this.bae = bae;
 	}
-	
+	public String getGam() {
+		return gam;
+	}
+	public void setGam(String gam) {
+		this.gam = gam;
+	}
+	public String getImg() {
+		return img;
+	}
+	public void setImg(String img) {
+		this.img = img;
+	}
+
 	
 
 }

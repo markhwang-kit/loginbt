@@ -46,6 +46,9 @@ MemberDto dto = (MemberDto)session.getAttribute("member");
      <li class="nav-item">
       <a class="nav-link" href="movie.nhn">영화 랭킹</a>
     </li>
+     <li class="nav-item">
+      <a class="nav-link" href="hugi.nhn">영화 후기</a>
+    </li>
   </ul>
 </nav>
 
