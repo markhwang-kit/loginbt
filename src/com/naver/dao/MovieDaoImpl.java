@@ -21,13 +21,20 @@ public class MovieDaoImpl implements MovieDao{
 
 		try {
 			conn = DB.conn(); 
-			String sql = "INSERT INTO movie (je, bae, gam, img) VALUES (?, ?, ?, ?)";
-			pstmt = conn.prepareStatement(sql);
+//			String sql = "INSERT INTO movie(je, bae, gam, img) \r\n" + 
+//					"SELECT '새로운영화', '배우', '감독', 'http://' FROM DUAL WHERE NOT EXISTS \r\n" + 
+//					"(SELECT je, bae, gam, img FROM movie WHERE je = '새로운영화')";
+			StringBuffer sql = new StringBuffer();
+			sql.append("INSERT INTO movie(je, bae, gam, img) ");
+			sql.append("SELECT ?, ?, ?, ? FROM DUAL WHERE NOT EXISTS ");
+			sql.append("(SELECT je, bae, gam, img FROM movie WHERE je = ?) ");
+			pstmt = conn.prepareStatement(sql.toString());
 			
 			pstmt.setString(1, dto.getJe());
 			pstmt.setString(2, dto.getBae());
 			pstmt.setString(3, dto.getGam());
 			pstmt.setString(4, dto.getImg());
+			pstmt.setString(5, dto.getJe());
 			
 			int count = pstmt.executeUpdate();
 			if (count == 0) {
@@ -110,6 +117,7 @@ public class MovieDaoImpl implements MovieDao{
 				dto.setJe(rs.getString("je"));
 				dto.setBae(rs.getString("bae"));
 				dto.setGam(rs.getString("gam"));
+				dto.setImg(rs.getString("img"));	
 				list.add(dto);
 			}
 
