@@ -34,6 +34,13 @@ public class MovieServlet2 extends HttpServlet {
 		// 데이터 베이스 버전
 		MovieDao dao = new MovieDaoImpl();
 		ArrayList<MovieDto> list = dao.select();
+		for (MovieDto d : list) {
+			System.out.println(d.getJe());
+			System.out.println(d.getImg());
+			System.out.println(d.getBae());
+			System.out.println(d.getGam());
+			System.out.println(d.getNum());
+		}
 		request.setAttribute("movieList", list);
 		
 		// 뷰로 보냄

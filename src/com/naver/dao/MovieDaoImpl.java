@@ -112,6 +112,11 @@ public class MovieDaoImpl implements MovieDao{
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
+//				System.out.println(rs.getInt("num"));
+//				System.out.println(rs.getString("je"));
+//				System.out.println(rs.getString("bae"));
+//				System.out.println(rs.getString("gam"));
+//				System.out.println(rs.getString("img"));
 				MovieDto dto = new MovieDto();
 				dto.setNum(rs.getInt("num"));
 				dto.setJe(rs.getString("je"));

@@ -2,7 +2,12 @@
     pageEncoding="UTF-8"%>
     
 <%@ include file="top.jsp" %>
-
+<%
+	if (dto == null) {
+		response.sendRedirect("login.nhn");
+		return;
+	}
+%>
 <div class="container">
 
 <h3>영화 랭킹 출력</h3>
@@ -26,11 +31,13 @@
        
             <div class="form-group">
               <label for="m_tit">영화제목:</label>
-              <input type="text" class="form-control" id="m_tit" placeholder="영화제목" name="m_tit">
+              <input type="text" class="form-control" id="m_tit" placeholder="영화제목" name="m_tit" disabled>
+              <input type="hidden" id="mv_num" value="">
             </div>
             <div class="form-group">
               <label for="name">작성자:</label>
-              <input type="text" class="form-control" id="name" placeholder="작성자" name="name">
+              <input type="text" class="form-control" id="name" placeholder="작성자" name="name" disabled>
+              <input type="hidden" id="mb_num" value="">
             </div>
            <div class="form-group">
               <label for="h_tit">후기제목:</label>
@@ -47,8 +54,8 @@
         
         <!-- Modal footer -->
         <div class="modal-footer">
-          <button type="submit" class="btn btn-primary">작성완료</button>
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary" id="okBtn">작성완료</button>
+          <button type="button" class="btn btn-danger" id="close_modal">Close</button>
         </div>
         
       </div>
@@ -57,35 +64,62 @@
  <!-- The Modal -->
 </div>  
 <script>
-function modal_show (je) {
+function modal_show (num) {
     $("#myModal").modal("show");
-    console.log(je);
+    // 사용자에게 보여주는 값 셋팅
+	var je = $("#mv" + num).val();
+	$("#m_tit").val(je); // 영화 제목
+	$("#name").val('<%=dto.getName() %>');  // 작성자
+	
+	// 데이터 넘길 때 값 세팅
+	$("#mv_num").val(num);   // 영화 번호
+	$("#mb_num").val(<%=dto.getNum() %>);  // 유저 번호
+//     alert(je);
 }
 
 $(document).ready(function(){
-//     $("#close_modal").click(function() {
-//         $("#myModal").modal("hide");
-//     });
+    $("#close_modal").click(function() {
+        $("#myModal").modal("hide");
+    });
+    
+    $("#okBtn").click(function() {
+//         alert("전송 합시다.");
+        var m_tit = $("#mv_num").val();  // 영화 제목
+        var name = $("#mb_num").val();   // 작성자
+        var h_tit = $("#h_tit").val();  // 후기 제목
+        var hugi = $("#hugi").val();   // 후기 내용
+        
+        console.log(m_tit);
+        console.log(name);
+        console.log(h_tit);
+        console.log(hugi);
+        
+        $.post("hugiok.nhn",
+        {
+        	mv_num:	m_tit,
+        	mb_num:	name,
+        	h_tit:	h_tit,
+        	hugi:	hugi
+        }, function(data, status){
+        	console.log(data);
+        });
+    });
 	
-	var search = $("#search").val();
-	$("#result").html("여기에 찍히나: " + search);
-	console.log(search);
     $.get("movieok.nhn",
     function(data, status){
     	var html = "";
-    	console.log(data);
+//     	console.log(data);
 //     	console.log(data.items);
     	$.each(data, function(key, field){
-    		console.log(key);	
-    		console.log(field);	
-    		html += "<a href='" + field.link + "' target='_blank'>"
-    		html += "<img src='" + field.img + "'></a><br>";
+//     		console.log(key);	
+//     		console.log(field);	
+    		html += "<img src='" + field.img + "'><br>";
     		html += field.je + "<br>";
     		html += field.gam + "<br>";
     		html += field.bae + "<br>";
-//     		html += "<input type='hidden' value='" + field.num + "'>";
-    		html += '<button type="button" class="btn btn-success" onclick="modal_show(' + field.num +')">후기작성</button><br>>';
-//     		html += '<button type="button" class="btn btn-success">후기작성</button><br>';
+    		html += "<input type='hidden' id='mv" + field.num  + "' value='" + field.je + "'>";
+//     		html += '<button type="button" class="btn btn-success" onclick="modal_show(\'' + field.je + '\')">후기작성</button><br>>';
+    		html += '<button type="button" class="btn btn-success" onclick="modal_show(' + field.num + ')">후기작성</button><br>';
           });
 		$("#result").html(html);
     });

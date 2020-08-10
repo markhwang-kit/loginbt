@@ -7,6 +7,10 @@
 
 <%
 ArrayList<MovieDto> list = (ArrayList<MovieDto>)request.getAttribute("movieList");
+if (dto == null) {
+	response.sendRedirect("login.nhn");
+	return;
+}
 %>
 
 <div class="container">
@@ -20,6 +24,7 @@ ArrayList<MovieDto> list = (ArrayList<MovieDto>)request.getAttribute("movieList"
 <script>
 function send(je) {
 	alert(je);
+	alert("<%=dto.getName() %>");
 }
 </script>
 
