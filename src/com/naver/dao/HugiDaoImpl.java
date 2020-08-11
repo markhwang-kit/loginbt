@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import com.naver.db.DB;
 import com.naver.dto.HugiDto;
+import com.naver.dto.HugiPrintDto;
 
 public class HugiDaoImpl implements HugiDao{
 
@@ -54,30 +55,33 @@ public class HugiDaoImpl implements HugiDao{
 	}
 
 	@Override
-	public ArrayList<HugiDto> select() {
+	public ArrayList<HugiPrintDto> select() {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
 		// 전달 변수(dto 담을 그릇)
-		ArrayList<HugiDto> list = new ArrayList<HugiDto>();
+		ArrayList<HugiPrintDto> list = new ArrayList<HugiPrintDto>();
 		try {
 			conn = DB.conn();
-			String sql = "SELECT * FROM hugi";
-			pstmt = conn.prepareStatement(sql);
+			StringBuffer sql = new StringBuffer();
+			sql.append("SELECT h.no, m.je, h.title, h.score, ");
+			sql.append("(SELECT name FROM member WHERE num = h.mb_num) AS name ");
+			sql.append("FROM movie m join hugi h on m.num = h.mv_num");
+			pstmt = conn.prepareStatement(sql.toString());
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
-//				System.out.println(rs.getInt("num"));
+//				System.out.println(rs.getString("no"));
 //				System.out.println(rs.getString("je"));
-//				System.out.println(rs.getString("bae"));
-//				System.out.println(rs.getString("gam"));
-//				System.out.println(rs.getString("img"));
-				HugiDto dto = new HugiDto();
-//				dto.setNum(rs.getInt("num"));
-//				dto.setJe(rs.getString("je"));
-//				dto.setBae(rs.getString("bae"));
-//				dto.setGam(rs.getString("gam"));
-//				dto.setImg(rs.getString("img"));	
+//				System.out.println(rs.getString("title"));
+//				System.out.println(rs.getString("score"));
+//				System.out.println(rs.getString("name"));
+				HugiPrintDto dto = new HugiPrintDto();
+				dto.setNo(rs.getInt("no"));
+				dto.setJe(rs.getString("je"));
+				dto.setTitle(rs.getString("title"));
+				dto.setScore(rs.getInt("score"));
+				dto.setName(rs.getString("name"));	
 				list.add(dto);
 			}
 

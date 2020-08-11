@@ -56,7 +56,7 @@ public class Controller extends HttpServlet {
 		} else if (uri.equals("movieok.nhn")) {
 			site = "MovieServlet";
 		} else if (uri.equals("hugi.nhn")) {
-			site = "hugi.jsp";
+			site = "HugiPrintServlet";
 		} else if (uri.equals("hugiok.nhn")) {
 			site = "HugiServlet";
 		} else {
