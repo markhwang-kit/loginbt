@@ -59,6 +59,8 @@ public class Controller extends HttpServlet {
 			site = "HugiPrintServlet";
 		} else if (uri.equals("hugiok.nhn")) {
 			site = "HugiServlet";
+		} else if (uri.equals("hugidetail.nhn")) {
+			site = "HugiDetailServlet";
 		} else {
 			site = "404.jsp";
 			System.out.println("error");
