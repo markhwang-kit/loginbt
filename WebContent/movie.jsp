@@ -101,7 +101,12 @@ $(document).ready(function(){
         	h_tit:	h_tit,
         	hugi:	hugi
         }, function(data, status){
-        	console.log(data);
+        	if (data.trim() == "ok") {
+        		alert("후기가 저장 되었습니다.");
+        		location.reload();   // 페이지 새로고침
+        	} else {
+        		alert("저장에 실패 했습니다.\n관리자에게 문의");
+        	}
         });
     });
 	
